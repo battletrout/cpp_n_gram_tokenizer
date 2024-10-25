@@ -2,6 +2,9 @@
 build/
 out/
 
+# Data directory
+data/
+
 # IDE specific files
 .vs/
 .vscode/
