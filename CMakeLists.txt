@@ -9,6 +9,16 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Include FetchContent for downloading json library
+include(FetchContent)
+
+# Fetch json library
+FetchContent_Declare(
+    json
+    URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz
+)
+FetchContent_MakeAvailable(json)
+
 # Options
 option(BUILD_TESTS "Build tests" ON)
 option(BUILD_EXAMPLES "Build examples" ON)
@@ -33,10 +43,17 @@ file(GLOB_RECURSE SOURCES
 
 # Create main library
 add_library(${PROJECT_NAME} ${SOURCES})
+target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)
 
 # Create executable
 add_executable(${PROJECT_NAME}_exe src/main.cpp)
-target_link_libraries(${PROJECT_NAME}_exe PRIVATE ${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME}_exe PRIVATE 
+    ${PROJECT_NAME}
+    nlohmann_json::nlohmann_json
+)
+target_include_directories(${PROJECT_NAME}_exe PRIVATE 
+    ${json_SOURCE_DIR}/include
+)
 set_target_properties(${PROJECT_NAME}_exe PROPERTIES OUTPUT_NAME "${PROJECT_NAME}")
 
 # Tests - only if CMakeLists.txt exists
