@@ -39,13 +39,13 @@ add_executable(${PROJECT_NAME}_exe src/main.cpp)
 target_link_libraries(${PROJECT_NAME}_exe PRIVATE ${PROJECT_NAME})
 set_target_properties(${PROJECT_NAME}_exe PROPERTIES OUTPUT_NAME "${PROJECT_NAME}")
 
-# Tests
-if(BUILD_TESTS)
+# Tests - only if CMakeLists.txt exists
+if(BUILD_TESTS AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt")
     enable_testing()
     add_subdirectory(tests)
 endif()
 
-# Examples
-if(BUILD_EXAMPLES)
+# Examples - only if CMakeLists.txt exists
+if(BUILD_EXAMPLES AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/examples/CMakeLists.txt")
     add_subdirectory(examples)
 endif()
