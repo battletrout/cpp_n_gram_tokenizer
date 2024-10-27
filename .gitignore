@@ -5,6 +5,9 @@ out/
 # Data directory
 data/
 
+# Debug files
+*.dir
+
 # IDE specific files
 .vs/
 .vscode/
