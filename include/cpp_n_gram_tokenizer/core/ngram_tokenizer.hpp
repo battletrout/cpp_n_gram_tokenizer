@@ -16,12 +16,10 @@ public:
     std::vector<std::string> tokenize_text(const std::string& json_line);
     std::vector<std::tuple<std::string, std::vector<std::string>, int>> process_file(const std::string& filename);
     
-    // Make these protected instead of private so they can be exposed to Python
-    // but still maintain some encapsulation
 protected:
     std::string normalize_text(const std::string& text);
     std::vector<std::string> extract_ngrams(const std::string& text);
-
+    
 private:
     size_t n_size;
 };
