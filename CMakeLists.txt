@@ -19,6 +19,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(json)
 
+# Fetch pybind11 library
+FetchContent_Declare(
+    pybind11
+    GIT_REPOSITORY https://github.com/pybind/pybind11
+    GIT_TAG v2.11.1
+)
+FetchContent_MakeAvailable(pybind11)
+
 # Add include directories
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -36,10 +44,12 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-# Create executable
-add_executable(${PROJECT_NAME}_exe src/main.cpp)
-target_link_libraries(${PROJECT_NAME}_exe PRIVATE 
+# Create Python module
+pybind11_add_module(cpp_ngram 
+    python/bindings/ngram_tokenizer_wrapper.cpp
+)
+target_link_libraries(cpp_ngram PRIVATE 
     ${PROJECT_NAME}
     nlohmann_json::nlohmann_json
 )
-set_target_properties(${PROJECT_NAME}_exe PROPERTIES OUTPUT_NAME "${PROJECT_NAME}")
+# set_target_properties(${PROJECT_NAME}_exe PROPERTIES OUTPUT_NAME "${PROJECT_NAME}")
