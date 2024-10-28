@@ -12,12 +12,6 @@ PYBIND11_MODULE(cpp_ngram, m) {
 
     py::class_<cpp_n_gram_tokenizer::NgramTokenizer>(m, "NgramTokenizer")
         .def(py::init<size_t>(), py::arg("n_size"))
-        .def("normalize_text", &cpp_n_gram_tokenizer::NgramTokenizer::normalize_text,
-             "Normalize input text by converting to lowercase and handling whitespace",
-             py::arg("text"))
-        .def("extract_ngrams", &cpp_n_gram_tokenizer::NgramTokenizer::extract_ngrams,
-             "Extract n-grams from normalized text",
-             py::arg("text"))
         .def("tokenize_text", &cpp_n_gram_tokenizer::NgramTokenizer::tokenize_text,
              "Tokenize text from a JSON line",
              py::arg("json_line"))
