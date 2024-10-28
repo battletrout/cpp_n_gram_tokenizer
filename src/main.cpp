@@ -24,12 +24,12 @@ void print_result(const std::tuple<std::string, std::vector<std::string>, int>& 
 
 int main() {
     const std::vector<std::string> test_files = {
-        "data/eng.imdb.test.jsonl",
-        "data/spa.muchocine.test.jsonl"
+        "eng.imdb.test.jsonl",
+        "spa.muchocine.test.jsonl"
     };
     
     try {
-        cpp_n_gram_tokenizer::NgramTokenizer tokenizer(3); // Using trigrams
+        cpp_n_gram_tokenizer::NgramTokenizer tokenizer(4); // Using trigrams
         
         for (const auto& filename : test_files) {
             std::cout << "\nProcessing file: " << filename << std::endl;

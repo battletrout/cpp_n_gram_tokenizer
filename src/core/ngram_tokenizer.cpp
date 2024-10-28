@@ -4,6 +4,7 @@
 #include <fstream>
 #include <algorithm>
 #include <stdexcept>
+#include <iostream>
 
 using json = nlohmann::json;
 
@@ -75,7 +76,7 @@ NgramTokenizer::process_file(const std::string& filename) {
             results.emplace_back(id, ngrams, label);
         } catch (const json::exception& e) {
             // Log error and continue
-            std::cerr << "Error processing line: " << e.what() << std::endl;
+            std::cout << "Error processing line: " << e.what() << std::endl;
             continue;
         }
     }
