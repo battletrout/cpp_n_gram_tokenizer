@@ -1,4 +1,4 @@
-# N-gram Text Classifier
+# N-gram Tokenizer and Text Classifier
 
 A cross-language text classification project for my Information Retrieval course that uses character n-grams to tokenize text, then perform sentiment analysis on movie reviews in English and Spanish. The implementation combines a C++ n-gram tokenizer (wrapped with pybind11) with Python's scikit-learn for classification. Character n-grams allow the system to identify sentiment patterns across languages without translation or language-specific preprocessing, enabling classification of both English and Spanish reviews using the same model.
 
