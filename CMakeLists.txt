@@ -6,6 +6,9 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Add position independent code flag
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 # Generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -38,7 +41,7 @@ file(GLOB_RECURSE SOURCES
 )
 
 # Create main library
-add_library(${PROJECT_NAME} ${SOURCES})
+add_library(${PROJECT_NAME} STATIC ${SOURCES})
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)
 target_include_directories(${PROJECT_NAME} PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -52,4 +55,11 @@ target_link_libraries(cpp_ngram PRIVATE
     ${PROJECT_NAME}
     nlohmann_json::nlohmann_json
 )
-# set_target_properties(${PROJECT_NAME}_exe PROPERTIES OUTPUT_NAME "${PROJECT_NAME}")
+
+# Create executable
+add_executable(${PROJECT_NAME}_exe src/main.cpp)
+target_link_libraries(${PROJECT_NAME}_exe PRIVATE 
+    ${PROJECT_NAME}
+    nlohmann_json::nlohmann_json
+)
+set_target_properties(${PROJECT_NAME}_exe PROPERTIES OUTPUT_NAME "${PROJECT_NAME}")
