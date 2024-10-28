@@ -8,7 +8,7 @@ A cross-language text classification project for my Information Retrieval course
 - Docker
 - VSCode with Dev Containers extension
 - Python 3.8+
-- C++20 compatible compiler
+- C++ compiler (I used g++ 10)
 - CMake 3.16+
 
 ### Development Environment Setup
@@ -18,6 +18,7 @@ A cross-language text classification project for my Information Retrieval course
 4. Wait for container to build (this will install all dependencies including spaCy)
 
 ### Building the Project
+Use the "build" option at the root directory in vscode, or:
 ```bash
 mkdir build
 cd build
