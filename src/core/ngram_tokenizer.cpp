@@ -111,16 +111,16 @@ std::vector<std::string> NgramTokenizer::tokenize_text(const std::string& json_l
         std::string text = j["text"].get<std::string>();
         
         // Debug output
-        std::cout << "Processing text: " << text.substr(0, 50) << "..." << std::endl;
+        //std::cout << "Processing text: " << text.substr(0, 50) << "..." << std::endl;
         
         // Extract n-grams
         auto ngrams = extract_ngrams(text);
         
         // Debug output
-        std::cout << "Generated " << ngrams.size() << " n-grams" << std::endl;
-        if (!ngrams.empty()) {
-            std::cout << "First n-gram: " << ngrams[0] << std::endl;
-        }
+        //std::cout << "Generated " << ngrams.size() << " n-grams" << std::endl;
+        // if (!ngrams.empty()) {
+        //     std::cout << "First n-gram: " << ngrams[0] << std::endl;
+        // }
         
         return ngrams;
     } catch (const json::exception& e) {
