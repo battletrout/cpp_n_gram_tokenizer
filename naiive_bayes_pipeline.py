@@ -56,18 +56,18 @@ class NgramDocumentProcessor:
             json_bytes = json.dumps(json_input, ensure_ascii=False).encode('utf-8')
             json_str = json_bytes.decode('utf-8')
             
-            # Debug prints
-            print(f"\nProcessing document:")
-            print(f"Original text sample: {text[:50]}")
-            print(f"JSON string sample: {json_str[:50]}")
+            # # Debug prints
+            # print(f"\nProcessing document:")
+            # print(f"Original text sample: {text[:50]}")
+            # print(f"JSON string sample: {json_str[:50]}")
             
             # Get n-grams from C++ tokenizer
             ngrams = self.tokenizer.tokenize_text(json_str)
-            
-            # Debug print
-            print(f"Generated {len(ngrams)} n-grams")
-            if ngrams:
-                print(f"First few n-grams: {ngrams[:5]}")
+            # print(ngrams)
+            # # Debug print
+            # print(f"Generated {len(ngrams)} n-grams")
+            # if ngrams:
+            #     print(f"First few n-grams: {ngrams[:5]}")
                 
             return ' '.join(ngrams)
             
@@ -111,18 +111,18 @@ def main():
     print(f"Loaded {len(test_data)} English test reviews")
     
     # Try processing a single review first as a test
-    if train_data:
-        print("\nTesting single review processing:")
-        first_review = train_data[0]
-        print(f"Review ID: {first_review['id']}")
-        print(f"Label: {first_review['label']}")
-        print(f"Text encoding: {first_review['text'].encode()}")
-        ngram_text = processor.process_text(first_review['text'])
-        if ngram_text:
-            print("Successfully processed first review")
-        else:
-            print("Failed to process first review")
-            return
+    # if train_data:
+    #     print("\nTesting single review processing:")
+    #     first_review = train_data[0]
+    #     print(f"Review ID: {first_review['id']}")
+    #     print(f"Label: {first_review['label']}")
+    #     print(f"Text encoding: {first_review['text'].encode()}")
+    #     ngram_text = processor.process_text(first_review['text'])
+    #     if ngram_text:
+    #         print("Successfully processed first review")
+    #     else:
+    #         print("Failed to process first review")
+    #         return
     
     # Process training data
     print("\nProcessing training data...")
@@ -131,12 +131,12 @@ def main():
     
     for i, review in enumerate(train_data):
         try:
-            print(f"\nProcessing training review {i+1}")
+            # print(f"\nProcessing training review {i+1}")
             ngram_text = processor.process_text(review["text"])
             if ngram_text:
                 train_texts.append(ngram_text)
                 train_labels.append(review["label"])
-                print("Success")
+                # print("Success")
             else:
                 print("Failed to generate n-grams")
         except Exception as e:
@@ -166,13 +166,13 @@ def main():
                 test_texts.append(ngram_text)
                 test_labels.append(review["label"])
                 
-                pred = classifier.predict([ngram_text])[0]
-                prob = classifier.predict_proba([ngram_text])[0]
+                # pred = classifier.predict([ngram_text])[0]
+                # prob = classifier.predict_proba([ngram_text])[0]
                 
-                print(f"\nReview {i+1}:")
-                print(f"ID: {review['id']}")
-                print(f"True label: {review['label']}")
-                print(f"Predicted: {pred} (confidence: {max(prob):.3f})")
+                # print(f"\nReview {i+1}:")
+                # print(f"ID: {review['id']}")
+                # print(f"True label: {review['label']}")
+                # print(f"Predicted: {pred} (confidence: {max(prob):.3f})")
         except Exception as e:
             print(f"Error processing test review {i+1}: {str(e)}")
             continue
